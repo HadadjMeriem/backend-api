@@ -8,7 +8,7 @@ def create_app(test_config=None):
      if test_config is None: 
           app.config.from_mapping(
                SECRET_KEY=os.environ.get("SECRET_KEY"),
-               SQLALCHEMY_DATABASE_URI=os.environ.get("DATABASE_URL"),
+               SQLALCHEMY_DATABASE_URI="postgresql://respiratory_classification_project_user:7L3MyQ2u8DG9V2VAhHbtPVCLs4R3kBOb@dpg-cip0ebenqql4qa14kev0-a.oregon-postgres.render.com/respiratory_classification_project",
                SQLALCHEMY_TRACK_MODIFICATIONS=True
 
           )
