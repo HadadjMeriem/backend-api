@@ -11,3 +11,4 @@ Werkzeug
 flask_bcrypt
 dotenv
 PyJWT
+gunicorn
