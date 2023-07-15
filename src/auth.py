@@ -3,7 +3,6 @@ from flask_bcrypt import Bcrypt
 from src.database import User,db
 from src.constant.status_code import HTTP_400_BAD_REQUEST,HTTP_409_CONFLICT,HTTP_201_CREATED,HTTP_200_OK,HTTP_401_UNAUTHORIZED
 from src.app import app
-import validators
 import jwt
 import os
 
