@@ -1,0 +1,13 @@
+flask 
+click
+Flask-SQLAlchemy
+greenlet
+Jinja2==3.1.2
+MarkupSafe==2.1.1
+psycopg2-binary
+psycopg2
+SQLAlchemy
+Werkzeug
+flask_bcrypt
+dotenv
+PyJWT
