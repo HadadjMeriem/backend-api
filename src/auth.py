@@ -36,7 +36,7 @@ def register():
               if(str(password)!=str(confirm_password)):  
                     return(jsonify({'error':'les deux mots de passe doivent etre les memes'}),HTTP_400_BAD_REQUEST)
               else: 
-                   new_user = User(email=email, username=username, password=bcrypt.generate_password_hash(password))
+                   new_user = User(email=email, username=username, password=bcrypt.generate_password_hash(password).decode('utf-8'))
                    db.session.add(new_user)
                    db.session.commit()
                    print(new_user.id)
