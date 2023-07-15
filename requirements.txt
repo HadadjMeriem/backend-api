@@ -9,6 +9,6 @@ psycopg2
 SQLAlchemy
 Werkzeug
 flask_bcrypt
-dotenv
+python-dotenv
 PyJWT
 gunicorn
