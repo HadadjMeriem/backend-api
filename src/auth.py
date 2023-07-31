@@ -59,9 +59,9 @@ def login():
 
                 return (jsonify({'user':{'auth_token':auth_token,'username':user.username,'email':user.email}}),HTTP_200_OK)
            else: 
-                  return (jsonify({'error':'mot de passe incorrect'},HTTP_400_BAD_REQUEST))
+                  return (jsonify({'error':'mot de passe incorrect'}),HTTP_400_BAD_REQUEST)
      else: 
-           return (jsonify({'error':'email n existe pas '},HTTP_401_UNAUTHORIZED))
+           return (jsonify({'error':'email n existe pas '}),HTTP_401_UNAUTHORIZED)
            
 @auth.get("/me")
 def me():
