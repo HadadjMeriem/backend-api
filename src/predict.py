@@ -67,7 +67,7 @@ def classifySon():
                   print("Failed to download the file.")
 
         elif split=='cross':
-               model_path='src/data/model-fold-3.pth'
+               model_path='https://drive.google.com/file/d/1o6bJsm60LWkNsoQyhFs30UHx6xxcsNM9/uc?export=download'
                patch_size=(12,16)
         utils=Utils()
         print(audio_file.filename)
