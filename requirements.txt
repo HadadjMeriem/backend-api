@@ -51,6 +51,7 @@ sympy
 threadpoolctl
 timm==0.4.5
 torch
+torchaudio
 torchvision
 typing_extensions
 unicorn
