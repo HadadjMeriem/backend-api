@@ -43,7 +43,7 @@ def classifySon():
              if os.path.exists(file_path):
                   model_path=download_path
                   patch_size=(8,16)
-             else
+             else:
                 dropbox_link = "https://www.dropbox.com/scl/fi/4uila0ojjfvh2y8zfzfwl/model_son.pth?rlkey=khbl39jyr7nosinqzitu9u7ra&dl=0"
 
                 # Get the direct download link
