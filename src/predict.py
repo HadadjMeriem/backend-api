@@ -30,14 +30,33 @@ def getPathologie(num):
 def classifySon():
      audio_file = request.files['audioFile']
      split=request.form.get('split')
-     test_df=pd.read_csv('src/data/cycles/cycles.csv')
+     test_df=pd.read_csv('src/cycles.csv')
      if audio_file:
         # Save the uploaded file (optional)
         # audio_file.save('uploaded_audio.wav')
 
         # Load the audio file using librosa
         if split=='officiel':
-               model_path='src/data/model_son.pth'
+             # Define the Dropbox link to the file
+             dropbox_link = "https://www.dropbox.com/scl/fi/4uila0ojjfvh2y8zfzfwl/model_son.pth?rlkey=khbl39jyr7nosinqzitu9u7ra&dl=0"
+
+             # Get the direct download link
+             download_link = dropbox_link.replace("www.dropbox.com", "dl.dropboxusercontent.com").replace("?dl=0", "")
+
+             # Define where you want to save the downloaded file
+             download_path = "/src/model_son.pth"
+             # Download the file
+             response = requests.get(download_link)
+             if response.status_code == 200:
+                 with open(download_path, 'wb') as f:
+                     f.write(response.content)
+                 print("File downloaded successfully.")
+
+                 # Load the downloaded model using torch.load
+                 #model = torch.load(download_path, map_location=torch.device('cpu'))
+             else:
+                 print("Failed to download the file.")
+               model_path=download_path
                patch_size=(8,16)
         elif split=='cross':
                model_path='src/data/model-fold-3.pth'
