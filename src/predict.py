@@ -37,10 +37,10 @@ def classifySon():
 
         # Load the audio file using librosa
         if split=='officiel':
-               model_path='src/data/checkpoints/model_son.pth'
+               model_path='src/data/model_son.pth'
                patch_size=(8,16)
         elif split=='cross':
-               model_path='src/data/checkpoints/model-fold-3.pth'
+               model_path='src/data/model-fold-3.pth'
                patch_size=(12,16)
         utils=Utils()
         print(audio_file.filename)
@@ -64,10 +64,10 @@ def classifyPathologie():
         # audio_file.save('uploaded_audio.wav')
         # Load the audio file using librosa
         if split=='cross':
-            model_path='src/data/checkpoints/model-fold-0.pth'
+            model_path='src/data/model-fold-0.pth'
             patch_size=(12,16)
         elif split=='officiel':
-            model_path='src/data/checkpoints/model-pathologie.pth'
+            model_path='src/data/model-pathologie.pth'
             patch_size=(8,16)
         utils=Utils()
         print(audio_file.filename)
