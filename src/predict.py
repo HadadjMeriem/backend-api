@@ -4,6 +4,7 @@ from src.constant.status_code import HTTP_400_BAD_REQUEST,HTTP_409_CONFLICT,HTTP
 import os
 import pandas as pd
 from src.model import Utils
+import requests
 predict = Blueprint("predict", __name__, url_prefix="/api/predict")
 headers={'Authorization':''}
 def getLabel(c,w):
@@ -37,27 +38,32 @@ def classifySon():
 
         # Load the audio file using librosa
         if split=='officiel':
-             # Define the Dropbox link to the file
-             dropbox_link = "https://www.dropbox.com/scl/fi/4uila0ojjfvh2y8zfzfwl/model_son.pth?rlkey=khbl39jyr7nosinqzitu9u7ra&dl=0"
-
-             # Get the direct download link
-             download_link = dropbox_link.replace("www.dropbox.com", "dl.dropboxusercontent.com").replace("?dl=0", "")
-
-             # Define where you want to save the downloaded file
              download_path = "/src/model_son.pth"
-             # Download the file
-             response = requests.get(download_link)
-             if response.status_code == 200:
-                 with open(download_path, 'wb') as f:
-                     f.write(response.content)
-                 print("File downloaded successfully.")
+             # Define the Dropbox link to the file
+             if os.path.exists(file_path):
+                  model_path=download_path
+                  patch_size=(8,16)
+             else
+                dropbox_link = "https://www.dropbox.com/scl/fi/4uila0ojjfvh2y8zfzfwl/model_son.pth?rlkey=khbl39jyr7nosinqzitu9u7ra&dl=0"
 
-                 # Load the downloaded model using torch.load
-                 #model = torch.load(download_path, map_location=torch.device('cpu'))
-                 model_path=download_path
-                 patch_size=(8,16)
-             else:
-                 print("Failed to download the file.")
+                # Get the direct download link
+                download_link = dropbox_link.replace("www.dropbox.com", "dl.dropboxusercontent.com").replace("?dl=0", "")
+
+                # Define where you want to save the downloaded file
+                download_path = "/src/model_son.pth"
+                # Download the file
+                response = requests.get(download_link)
+                if response.status_code == 200:
+                  with open(download_path, 'wb') as f:
+                     f.write(response.content)
+                  print("File downloaded successfully.")
+
+                  # Load the downloaded model using torch.load
+                  #model = torch.load(download_path, map_location=torch.device('cpu'))
+                  model_path=download_path
+                  patch_size=(8,16)
+                else:
+                  print("Failed to download the file.")
 
         elif split=='cross':
                model_path='src/data/model-fold-3.pth'
