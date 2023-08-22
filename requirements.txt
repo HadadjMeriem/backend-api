@@ -49,8 +49,8 @@ SQLAlchemy==2.0.18
 sympy
 threadpoolctl
 timm==0.4.5
-torch==2.0.1
-torchvision==0.15.2
+torch
+torchvision
 typing_extensions
 unicorn
 urllib3==2.0.4
