@@ -35,6 +35,7 @@ numba
 numpy
 packaging
 Pillow
+pandas
 pooch
 psycopg2==2.9.6
 pycparser==2.21
