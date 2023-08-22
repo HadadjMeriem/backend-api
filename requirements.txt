@@ -24,7 +24,7 @@ itsdangerous==2.1.2
 Jinja2==3.1.2
 joblib==1.3.1
 lazy_loader==0.3
-librosa==0.10.0.post2
+librosa
 llvmlite
 Mako==1.2.4
 MarkupSafe==2.1.3
