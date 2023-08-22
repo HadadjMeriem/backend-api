@@ -56,4 +56,4 @@ unicorn
 urllib3==2.0.4
 urwid==2.1.2
 validators==0.20.0
-Werkzeug==2.3.6
+Werkzeug
