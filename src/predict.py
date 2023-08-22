@@ -37,10 +37,11 @@ def classifySon():
         # audio_file.save('uploaded_audio.wav')
 
         # Load the audio file using librosa
+        print(audio_file.filename)
         if split=='officiel':
              download_path = "/src/model_son.pth"
              # Define the Dropbox link to the file
-             if os.path.exists(file_path):
+             if os.path.exists(download_path):
                   model_path=download_path
                   patch_size=(8,16)
              else:
