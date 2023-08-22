@@ -51,7 +51,7 @@ def classifySon():
                 download_link = dropbox_link.replace("www.dropbox.com", "dl.dropboxusercontent.com").replace("?dl=0", "")
 
                 # Define where you want to save the downloaded file
-                download_path = "/src/model_son.pth"
+                download_path = "src/model_son.pth"
                 # Download the file
                 response = requests.get(download_link)
                 if response.status_code == 200:
