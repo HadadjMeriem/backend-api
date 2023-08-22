@@ -54,10 +54,11 @@ def classifySon():
 
                  # Load the downloaded model using torch.load
                  #model = torch.load(download_path, map_location=torch.device('cpu'))
+                 model_path=download_path
+                 patch_size=(8,16)
              else:
                  print("Failed to download the file.")
-               model_path=download_path
-               patch_size=(8,16)
+
         elif split=='cross':
                model_path='src/data/model-fold-3.pth'
                patch_size=(12,16)
