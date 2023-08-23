@@ -69,6 +69,8 @@ def classifySon():
         #predict=utils.load_model(model_path,audio_file,split=split,patch_size=patch_size)
         test_df=pd.read_csv('src/cycles.csv')
         print(test_df)
+        model=torch.load(model_path,map_location=torch.device('cpu'))
+        print(model)
         crackle=test_df.loc[test_df['filename']==str(audio_file.filename)]['crackle'].to_list()[0]
         whheze=test_df.loc[test_df['filename']==str(audio_file.filename)]['wheezes'].to_list()[0]
         label=getLabel(crackle,whheze)
@@ -86,6 +88,7 @@ def classifyPathologie():
         # Save the uploaded file (optional)
         # audio_file.save('uploaded_audio.wav')
         # Load the audio file using librosa
+
         if split=='cross':
             model_path='src/data/model-fold-0.pth'
             patch_size=(12,16)
