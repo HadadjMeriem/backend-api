@@ -360,8 +360,8 @@ class Utils():
      audio, sr = librosa.load(filepath, sr=16000)
      #split or pad the audio to the desired length 
      audio=self.split_and_pad([audio, 0,0,0,0],8,16000, types='repeat')[0][0]
-     train_transform_stft= [transforms.ToTensor(),transforms.Resize(size=(int(64), int(800)))]
-     transform_stft=transforms.Compose(train_transform_stft)
+     train_transform_stft= [transforms.ToTensor(),transforms.Resize(size=(int(8), int(100)))]
+     transform_stft=transforms.Compose(train_transform_stft,transforms.Resize(size=(int(8), int(100))))
      transform=transforms.ToTensor()
      fbank = torchaudio.compliance.kaldi.fbank(torch.tensor(audio).unsqueeze(0), htk_compat=True, sample_frequency=16000, use_energy=False, window_type='hanning', num_mel_bins=64, dither=0.0, frame_shift=10)
      fbank = fbank.unsqueeze(-1).numpy()
