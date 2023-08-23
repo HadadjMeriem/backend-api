@@ -74,7 +74,7 @@ def classifySon():
         label=getLabel(crackle,whheze)
       
 
-        #return jsonify({'prediction': str(getSon(str(predict))),'label':str(getSon(str(label)))})
+        return jsonify({'prediction': str(getSon(str(predict))),'label':str(getSon(str(label)))})
 
      return jsonify({'message': 'No file uploaded'})
 @predict.post('/pathologie')
