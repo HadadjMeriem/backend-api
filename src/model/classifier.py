@@ -383,8 +383,8 @@ class Utils():
             net=CrossDeit(cross_attn_depth=7,classes=6,patch_size=patch_size)
         else: 
             net=CrossDeit(cross_attn_depth=3,classes=6,patch_size=patch_size)
-     #fbank,stft=self.preprocess_audio(filepath)
-     #print(fbank)
+     fbank,stft=self.preprocess_audio(filepath)
+     print(fbank)
      #fbank=fbank.unsqueeze(0).to('cpu')
      #stft=torch.abs(stft)
      #print(stft.shape)
@@ -396,7 +396,7 @@ class Utils():
      #output = net(fbank,stft)
      #print(output)
      #_, predicted_class = torch.max(output, dim=1)
-     pridected_class=0
+     predicted_class=0
      #print("pridected_class"+str(predicted_class.item()))
      return(predicted_class)
 
