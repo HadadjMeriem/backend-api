@@ -33,6 +33,7 @@ def classifySon():
      audio_file = request.files['audioFile']
      split=request.form.get('split')
      test_df=pd.read_csv('src/cycles.csv')
+     print(test_df)
      if audio_file:
         # Save the uploaded file (optional)
         # audio_file.save('uploaded_audio.wav')
@@ -43,6 +44,7 @@ def classifySon():
              dropbox_url = "https://dl.dropboxusercontent.com/scl/fi/4uila0ojjfvh2y8zfzfwl/model_son.pth?rlkey=khbl39jyr7nosinqzitu9u7ra"
              response = requests.get(dropbox_url)
              response.raise_for_status()
+             print(response.content)
              model_bytes = BytesIO(response.content)
              model_path=model_bytes
              patch_size=(8,16)
