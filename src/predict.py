@@ -2,6 +2,7 @@ import datetime
 from flask import Blueprint, flash, redirect, render_template,request,jsonify, url_for
 from src.constant.status_code import HTTP_400_BAD_REQUEST,HTTP_409_CONFLICT,HTTP_201_CREATED,HTTP_200_OK,HTTP_401_UNAUTHORIZED, HTTP_411_LENGTH_REQUIRED
 import os
+import torch
 from io import BytesIO
 import pandas as pd
 from src.model import Utils
