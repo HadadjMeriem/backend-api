@@ -2,6 +2,7 @@ import datetime
 from flask import Blueprint, flash, redirect, render_template,request,jsonify, url_for
 from src.constant.status_code import HTTP_400_BAD_REQUEST,HTTP_409_CONFLICT,HTTP_201_CREATED,HTTP_200_OK,HTTP_401_UNAUTHORIZED, HTTP_411_LENGTH_REQUIRED
 import os
+from io import BytesIO
 import pandas as pd
 from src.model import Utils
 import requests
@@ -39,32 +40,14 @@ def classifySon():
         # Load the audio file using librosa
         print(audio_file.filename)
         if split=='officiel':
-             download_path = "src/model_son.pth"
-             # Define the Dropbox link to the file
-             if os.path.exists(download_path):
-                  model_path=download_path
-                  patch_size=(8,16)
-             else:
-                dropbox_link = "https://www.dropbox.com/scl/fi/4uila0ojjfvh2y8zfzfwl/model_son.pth?rlkey=khbl39jyr7nosinqzitu9u7ra&dl=0"
-
-                # Get the direct download link
-                download_link = dropbox_link.replace("www.dropbox.com", "dl.dropboxusercontent.com").replace("?dl=0", "")
-
-                # Define where you want to save the downloaded file
-                download_path = "src/model_son.pth"
-                # Download the file
-                response = requests.get(download_link)
-                if response.status_code == 200:
-                  with open(download_path, 'wb') as f:
-                     f.write(response.content)
-                  print("File downloaded successfully.")
-
-                  # Load the downloaded model using torch.load
-                  #model = torch.load(download_path, map_location=torch.device('cpu'))
-                  model_path=download_path
-                  patch_size=(8,16)
-                else:
-                  print("Failed to download the file.")
+             dropbox_url = "https://dl.dropboxusercontent.com/scl/fi/4uila0ojjfvh2y8zfzfwl/model_son.pth?rlkey=khbl39jyr7nosinqzitu9u7ra"
+             response = requests.get(dropbox_url)
+             response.raise_for_status()
+             model_bytes = BytesIO(response.content)
+             model_path=model_bytes
+             patch_size=(8,16)
+             
+              
 
         elif split=='cross':
                model_path='https://drive.google.com/file/d/1o6bJsm60LWkNsoQyhFs30UHx6xxcsNM9/uc?export=download'
