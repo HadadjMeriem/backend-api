@@ -374,7 +374,7 @@ class Utils():
      fbank=transform_fbank(fbank)
      return fbank,stft
  def load_model(self,model_path,filepath,patch_size,split,type='son',DEVICE='cpu'):
-     lung_sound_model = torch.load(model_path,map_location=torch.device('cpu'))
+     #lung_sound_model = torch.load(model_path,map_location=torch.device('cpu'))
      if type=='son':
         net=CrossDeit(cross_attn_depth=3,classes=4,patch_size=patch_size)
         print('ok')
