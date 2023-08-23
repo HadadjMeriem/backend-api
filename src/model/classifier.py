@@ -360,8 +360,9 @@ class Utils():
      audio, sr = librosa.load(filepath, sr=16000)
      #split or pad the audio to the desired length 
      audio=self.split_and_pad([audio, 0,0,0,0],8,16000, types='repeat')[0][0]
-     train_transform_stft= [transforms.ToTensor(),transforms.Resize(size=(int(8), int(100)))]
+     train_transform_stft= [transforms.ToTensor()]
      transform_stft=transforms.Compose(train_transform_stft,transforms.Resize(size=(int(8), int(100))))
+     transform_fbank=transforms.Compose(train_transform_stft,transforms.Resize(size=(int(8), int(100))))
      transform=transforms.ToTensor()
      fbank = torchaudio.compliance.kaldi.fbank(torch.tensor(audio).unsqueeze(0), htk_compat=True, sample_frequency=16000, use_energy=False, window_type='hanning', num_mel_bins=64, dither=0.0, frame_shift=10)
      fbank = fbank.unsqueeze(-1).numpy()
@@ -370,7 +371,7 @@ class Utils():
      stft=librosa.stft(audio,n_fft=512, hop_length=40, win_length=512, window='hann', center=True, pad_mode='constant')  
      stft=(stft-stft.min())/(stft.max() - stft.min())
      stft=transform_stft(stft)
-     fbank=transform(fbank)
+     fbank=transform_fbank(fbank)
      return fbank,stft
  def load_model(self,model_path,filepath,patch_size,split,type='son',DEVICE='cpu'):
      lung_sound_model = torch.load(model_path,map_location=torch.device('cpu'))
