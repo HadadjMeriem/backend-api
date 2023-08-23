@@ -43,6 +43,7 @@ def classifySon():
         # Load the audio file using librosa
         print(audio_file.filename)
         if split=='officiel':
+             """
              dropbox_url = "https://dl.dropboxusercontent.com/scl/fi/4uila0ojjfvh2y8zfzfwl/model_son.pth?rlkey=khbl39jyr7nosinqzitu9u7ra"
              response = requests.get(dropbox_url)
              response.raise_for_status()
@@ -50,6 +51,7 @@ def classifySon():
              model_bytes = BytesIO(response.content)
              model_path=model_bytes
              patch_size=(8,16)
+             """
              
               
 
@@ -59,8 +61,11 @@ def classifySon():
         utils=Utils()
         print(audio_file.filename)
         print(split)
+        """
         print(model_path)
+          
         predict=utils.load_model(model_path,audio_file,split=split,patch_size=patch_size)
+        """
         test_df=pd.read_csv('src/cycles.csv')
         print(test_df)
         crackle=test_df.loc[test_df['filename']==str(audio_file.filename)]['crackle'].to_list()[0]
@@ -68,7 +73,7 @@ def classifySon():
         label=getLabel(crackle,whheze)
       
 
-        return jsonify({'prediction': str(getSon(str(predict))),'label':str(getSon(str(label)))})
+        #return jsonify({'prediction': str(getSon(str(predict))),'label':str(getSon(str(label)))})
 
      return jsonify({'message': 'No file uploaded'})
 @predict.post('/pathologie')
