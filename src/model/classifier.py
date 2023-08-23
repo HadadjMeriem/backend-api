@@ -376,17 +376,20 @@ class Utils():
      lung_sound_model = torch.load(model_path,map_location=torch.device('cpu'))
      if type=='son':
         net=CrossDeit(cross_attn_depth=3,classes=4,patch_size=patch_size)
+        print('ok')
      elif type=='pathologie':
         if split=='officiel':
             net=CrossDeit(cross_attn_depth=7,classes=6,patch_size=patch_size)
         else: 
             net=CrossDeit(cross_attn_depth=3,classes=6,patch_size=patch_size)
      fbank,stft=self.preprocess_audio(filepath)
+     print(fbank)
      fbank=fbank.unsqueeze(0).to('cpu')
      stft=torch.abs(stft)
      print(stft.shape)
      stft=stft.unsqueeze(0).to('cpu')
      net.load_state_dict(lung_sound_model)
+     print(net)
      net=net.to(DEVICE)
      net.eval()
      output = net(fbank,stft)
