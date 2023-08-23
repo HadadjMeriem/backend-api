@@ -383,7 +383,7 @@ class Utils():
             net=CrossDeit(cross_attn_depth=7,classes=6,patch_size=patch_size)
         else: 
             net=CrossDeit(cross_attn_depth=3,classes=6,patch_size=patch_size)
-     fbank,stft=self.preprocess_audio(filepath)
+     #fbank,stft=self.preprocess_audio(filepath)
      #print(fbank)
      #fbank=fbank.unsqueeze(0).to('cpu')
      #stft=torch.abs(stft)
