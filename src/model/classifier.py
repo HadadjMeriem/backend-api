@@ -14,6 +14,7 @@ from torchvision.transforms import Compose, Normalize, ToTensor
 import torchaudio
 import librosa
 import random
+import time
 class Residual(nn.Module):
     def __init__(self, fn):
         super().__init__()
@@ -360,9 +361,9 @@ class Utils():
      audio, sr = librosa.load(filepath, sr=16000)
      #split or pad the audio to the desired length 
      audio=self.split_and_pad([audio, 0,0,0,0],8,16000, types='repeat')[0][0]
-     train_transform_stft= [transforms.ToTensor()]
-     transform_stft=transforms.Compose(train_transform_stft,transforms.Resize(size=(int(8), int(100))))
-     transform_fbank=transforms.Compose(train_transform_stft,transforms.Resize(size=(int(8), int(100))))
+     train_transform_stft= [transforms.ToTensor(),transforms.Resize(size=(8, 100))]
+     transform_stft=transforms.Compose(train_transform_stft)
+     #transform_fbank=transforms.Compose(train_transform_stft,transforms.Resize(size=(int(8), int(100))))
      transform=transforms.ToTensor()
      fbank = torchaudio.compliance.kaldi.fbank(torch.tensor(audio).unsqueeze(0), htk_compat=True, sample_frequency=16000, use_energy=False, window_type='hanning', num_mel_bins=64, dither=0.0, frame_shift=10)
      fbank = fbank.unsqueeze(-1).numpy()
@@ -371,23 +372,28 @@ class Utils():
      stft=librosa.stft(audio,n_fft=512, hop_length=40, win_length=512, window='hann', center=True, pad_mode='constant')  
      stft=(stft-stft.min())/(stft.max() - stft.min())
      stft=transform_stft(stft)
-     fbank=transform_fbank(fbank)
+     fbank=transform_stft(fbank)
      return fbank,stft
  def load_model(self,model_path,filepath,patch_size,split,type='son',DEVICE='cpu'):
      #lung_sound_model = torch.load(model_path,map_location=torch.device('cpu'))
      if type=='son':
         net=CrossDeit(cross_attn_depth=3,classes=4,patch_size=patch_size)
         print('ok')
+        time.sleep(12)
      elif type=='pathologie':
         if split=='officiel':
             net=CrossDeit(cross_attn_depth=7,classes=6,patch_size=patch_size)
         else: 
             net=CrossDeit(cross_attn_depth=3,classes=6,patch_size=patch_size)
      fbank,stft=self.preprocess_audio(filepath)
+     time.sleep(12)
      print(fbank)
-     #fbank=fbank.unsqueeze(0).to('cpu')
-     #stft=torch.abs(stft)
-     #print(stft.shape)
+     lung_sound_model = torch.load(model_path,map_location=torch.device('cpu'))
+     time.sleep(12)
+     fbank=fbank.unsqueeze(0).to('cpu')
+     time.sleep(12)
+     stft=torch.abs(stft)
+     print(stft.shape)
      #stft=stft.unsqueeze(0).to('cpu')
      #net.load_state_dict(lung_sound_model)
      #print(net)
