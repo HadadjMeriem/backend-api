@@ -36,6 +36,7 @@ def classifySon():
      print(split)
      #test_df=pd.read_csv('src/cycles.csv')
      #print(test_df)
+     model_path=''
      if audio_file:
         # Save the uploaded file (optional)
         # audio_file.save('uploaded_audio.wav')
@@ -43,18 +44,21 @@ def classifySon():
         # Load the audio file using librosa
         print(audio_file.filename)
         if split=='officiel':
-             """
-             dropbox_url = "https://dl.dropboxusercontent.com/scl/fi/4uila0ojjfvh2y8zfzfwl/model_son.pth?rlkey=khbl39jyr7nosinqzitu9u7ra"
-             response = requests.get(dropbox_url)
-             response.raise_for_status()
-             print(response.content)
-             model_bytes = BytesIO(response.content)
-             model_path=model_bytes
-             patch_size=(8,16)
-             """
              
-              
-
+           dropbox_url = "https://dl.dropboxusercontent.com/scl/fi/4uila0ojjfvh2y8zfzfwl/model_son.pth?rlkey=khbl39jyr7nosinqzitu9u7ra"
+           # Create a directory to store the model file
+           os.makedirs("model", exist_ok=True)
+           model_path = "model/model_son.pth"  # Path to save the model
+           if os.path.exists(model_path):
+                 patch_size = (8, 16)
+           else:
+             # Stream the model file and save it to disk
+             with open(model_path, 'wb') as f:
+                response = requests.get(dropbox_url, stream=True)
+                response.raise_for_status()
+                for chunk in response.iter_content(chunk_size=8192):
+                    f.write(chunk)
+             patch_size = (8, 16)
         elif split=='cross':
                model_path='https://drive.google.com/file/d/1o6bJsm60LWkNsoQyhFs30UHx6xxcsNM9/uc?export=download'
                patch_size=(12,16)
