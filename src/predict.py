@@ -33,6 +33,7 @@ def classifySon():
      audio_file = request.files['audioFile']
      print(audio_file)
      split=request.form.get('split')
+     print(split)
      #test_df=pd.read_csv('src/cycles.csv')
      #print(test_df)
      if audio_file:
@@ -58,6 +59,7 @@ def classifySon():
         utils=Utils()
         print(audio_file.filename)
         print(split)
+        print(model_path)
         predict=utils.load_model(model_path,audio_file,split=split,patch_size=patch_size)
         test_df=pd.read_csv('src/cycles.csv')
         print(test_df)
