@@ -31,9 +31,10 @@ def getPathologie(num):
 @predict.post('/son')
 def classifySon():
      audio_file = request.files['audioFile']
+     print(audio_file)
      split=request.form.get('split')
-     test_df=pd.read_csv('src/cycles.csv')
-     print(test_df)
+     #test_df=pd.read_csv('src/cycles.csv')
+     #print(test_df)
      if audio_file:
         # Save the uploaded file (optional)
         # audio_file.save('uploaded_audio.wav')
@@ -58,6 +59,8 @@ def classifySon():
         print(audio_file.filename)
         print(split)
         predict=utils.load_model(model_path,audio_file,split=split,patch_size=patch_size)
+        test_df=pd.read_csv('src/cycles.csv')
+        print(test_df)
         crackle=test_df.loc[test_df['filename']==str(audio_file.filename)]['crackle'].to_list()[0]
         whheze=test_df.loc[test_df['filename']==str(audio_file.filename)]['wheezes'].to_list()[0]
         label=getLabel(crackle,whheze)
