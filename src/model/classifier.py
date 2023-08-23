@@ -392,11 +392,12 @@ class Utils():
      print(net)
      net=net.to(DEVICE)
      net.eval()
-     output = net(fbank,stft)
-     print(output)
-     _, predicted_class = torch.max(output, dim=1)
-     print("pridected_class"+str(predicted_class.item()))
-     return(predicted_class.item())
+     #output = net(fbank,stft)
+     #print(output)
+     #_, predicted_class = torch.max(output, dim=1)
+     pridected_class=0
+     #print("pridected_class"+str(predicted_class.item()))
+     return(predicted_class)
 
 
 
