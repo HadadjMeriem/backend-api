@@ -47,8 +47,8 @@ def classifySon():
              
            dropbox_url = "https://dl.dropboxusercontent.com/scl/fi/4uila0ojjfvh2y8zfzfwl/model_son.pth?rlkey=khbl39jyr7nosinqzitu9u7ra"
            # Create a directory to store the model file
-           os.makedirs("model", exist_ok=True)
-           model_path = "model/model_son.pth"  # Path to save the model
+           os.makedirs("models", exist_ok=True)
+           model_path = "models/model_son.pth"  # Path to save the model
            if os.path.exists(model_path):
                  patch_size = (8, 16)
            else:
